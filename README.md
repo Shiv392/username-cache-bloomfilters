@@ -64,34 +64,35 @@ Node.js API
 
 ---
 
-## 🛠️ Tech Stack
+🛠️ Tech Stack
+# Frontend
+Angular
+TypeScript
+Reactive Forms
+Angular HttpClient
 
-### Backend
+# Backend
+Node.js
+Express.js
+TypeScript
 
-* Node.js
-* Express.js
-* TypeScript
+# Database
+MySQL
+TypeORM
 
-### Database
+# Caching & Optimization
+Redis
+Redis Bloom Filter
 
-* MySQL
-* TypeORM
-
-### Caching & Optimization
-
-* Redis
-* Redis Bloom Filter
-
-### Development Tools
-
-* Postman
-* Docker (optional)
-* Git & GitHub
+# Development Tools
+Postman
+Docker (optional)
+Git & GitHub
 
 ---
 
 ## 📂 Project Structure
-
+# Backend
 ```text
 src/
 │
@@ -104,11 +105,7 @@ src/
 ├── config/
 └── app.ts
 ```
-
----
-
 ## 🗄️ Database Schema
-
 ### Users
 
 | Column     | Type         |
@@ -119,49 +116,10 @@ src/
 | created_at | TIMESTAMP    |
 
 Constraints:
-
 * UNIQUE(username)
-
----
-
-## 🔌 API Endpoints
-
-### Check Username
-
-```http
-GET /api/usernames/check?username=shiv
-```
-
-Response
-
-```json
-{
-  "username": "shiv",
-  "available": true
-}
-```
-
----
-
-### Register User
-
-```http
-POST /api/users
-```
-
-Request
-
-```json
-{
-  "username": "shiv",
-  "email": "shiv@example.com"
-}
-```
-
 ---
 
 ## 🎯 Learning Objectives
-
 This project demonstrates:
 
 * Bloom Filter fundamentals
@@ -176,7 +134,6 @@ This project demonstrates:
 ---
 
 ## 🚀 Future Improvements
-
 * Username suggestions
 * Redis caching layer
 * Read replicas
@@ -208,8 +165,7 @@ Trade-offs:
 * False positives are possible
 * False negatives are not possible
 
-Because of false positives, MySQL remains the source of truth.
-
+Because of false positives, MySQL & redis remains the source of truth.
 ---
 
 ## 📚 Concepts Covered
@@ -223,7 +179,6 @@ Because of false positives, MySQL remains the source of truth.
 * Database Indexing
 * Backend System Design
 * Performance Optimization
-
 ---
 
 ## ⭐ Project Goal
