@@ -1,4 +1,4 @@
-# username-cache-bloomfilters 🚀
+# Username-cache-bloomfilters 🚀
 A scalable username availability checking service inspired by platforms like Instagram, X (Twitter), and GitHub.
 
 The primary goal of this project is to explore how large-scale applications can efficiently validate username availability while reducing unnecessary database queries.
