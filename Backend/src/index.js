@@ -5,8 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.SERVER_PORT  || 5000;
 
-const sequelize = require('./Configs/DB/DbConfig');
-const RedisClient = require('./Configs/Redis/RedisConfig');
+const {sequelize, RedisClient} = require('./Configs/index.js')
 
 //# importing schemas ---------->
 const {UserSchema} = require('./Schemas/index');
@@ -18,9 +17,9 @@ const globalErrorHandler = require('./Utils/GlobalErrorHandler');
 
 const signupController = require('./Controllers/Signup_Controller');
 
-app.use(globalErrorHandler);
-
 app.use('/api', signupController);
+
+app.use(globalErrorHandler);
 
 async function startServer(){
     try{

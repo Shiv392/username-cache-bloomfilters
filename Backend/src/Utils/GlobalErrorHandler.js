@@ -1,9 +1,7 @@
 const GlobalErrorHandler = (err, req, res, next)=>{
-    console.log("Global error handler called", err);
 
-    res.status(500).json({
-        success : false,
-        message : "An error occurred on the server",
+    return res.status(err.statusCode || 500).json({
+        error : err.message || "An error occurred on the server",
     })
 }
 

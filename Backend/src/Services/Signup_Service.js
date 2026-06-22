@@ -1,8 +1,43 @@
-const SignupService = (req, res)=>{
-    return res.status(200).json({
-        success : true,
-        message : "Signup service is working",
-    });
+const { findUserByEmail, findUserName, UserSignUp } = require('../Repository/index');
+const { RedisClient } = require('../Configs/index');
+const AppError = require('../Utils/AppError');
+
+const SignupService = async (req, res) => {
+        const { name, email, username } = req.body;
+        if (!name || !email || !username) {
+            throw new AppError("Name, Email & Username is required", 400);
+        }
+
+        //first check if the username is not available
+        const exists = await RedisClient.sendCommand([
+            'BF.EXISTS', 'usernames', username
+        ]);
+
+        //if bloom filter says exists, make sure to check in the db also
+        if (Number(exists) == 1) {
+            const user = await findUserName({ username: username });
+            if (user) {
+                throw new AppError("Username already exists, try different usernames", 400);
+            }
+        }
+
+        //2. check if email is already used 
+        const userEmail = await findUserByEmail({ email: email });
+        if (userEmail) {
+            throw new AppError("User already exists", 400);
+        }
+
+        //3. insert new user;
+        await UserSignUp({ name: name, email: email, username: username });
+
+        //4. update bloom filters
+        await RedisClient.sendCommand([
+            'BF.ADD', 'usernames', username
+        ]);
+
+        return res.status(201).json({
+            message: "User has been created"
+        })
 }
 
 module.exports = SignupService;
