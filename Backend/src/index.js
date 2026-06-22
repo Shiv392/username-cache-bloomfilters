@@ -7,24 +7,29 @@ app.use(cors());
 app.use(express.json());
 
 const port = process.env.SERVER_PORT  || 5000;
-const dbConfig = require('./DB/DbConfig');
+
+const sequelize = require('./DB/DbConfig');
+//# importing schemas ---------->
+const {UserSchema} = require('./Schemas/index');
+
 const globalErrorHandler = require('./Utils/GlobalErrorHandler');
+
 const signupController = require('./Controllers/Signup_Controller');
 
 app.use(globalErrorHandler);
 
-dbConfig.getConnection((err, connnection)=>{
-    if(err){
-        console.log("Error connecting to database", err);
+async function startServer(){
+    try{
+        await sequelize.authenticate();
+        console.log("database connection done");
+
+        await sequelize.sync();
+        console.log("Schema Synced");
+
+        app.listen(port, ()=> console.log(`server started http://localhost:${port}`));
     }
-    else {
-        console.log("Database connected successfully");
+    catch(err){
+        console.log("error while starting server", err);
     }
-});
-
-app.use('/api/v1', signupController);
-
-
-app.listen(port,()=>{
-    console.log(`Server is running on port ${port}`);
-})
+}
+startServer();
