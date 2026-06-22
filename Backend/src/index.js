@@ -5,7 +5,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.SERVER_PORT  || 5000;
 
-const sequelize = require('./DB/DbConfig');
+const sequelize = require('./Configs/DB/DbConfig');
+const RedisClient = require('./Configs/Redis/RedisConfig');
+
 //# importing schemas ---------->
 const {UserSchema} = require('./Schemas/index');
 
@@ -27,6 +29,9 @@ async function startServer(){
 
         await sequelize.sync();
         console.log("Schema Synced");
+
+        await RedisClient.connect();
+        console.log("Redis client connected");
 
         app.listen(port, ()=> console.log(`server started http://localhost:${port}`));
     }
