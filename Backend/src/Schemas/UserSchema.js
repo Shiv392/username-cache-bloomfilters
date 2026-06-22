@@ -29,7 +29,7 @@ const UserSchema = sequelize.define(
     },
     {
         timestamps : true,
-        createdAt : true,
+        createdAt : true, 
         tableName : 'User'
     }
 );
