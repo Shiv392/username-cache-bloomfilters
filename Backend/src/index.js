@@ -3,20 +3,24 @@ const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
-app.use(cors());
-app.use(express.json());
-
 const port = process.env.SERVER_PORT  || 5000;
 
-const sequelize = require('./DB/DbConfig');
+const sequelize = require('./Configs/DB/DbConfig');
+const RedisClient = require('./Configs/Redis/RedisConfig');
+
 //# importing schemas ---------->
 const {UserSchema} = require('./Schemas/index');
+
+app.use(cors());
+app.use(express.json());
 
 const globalErrorHandler = require('./Utils/GlobalErrorHandler');
 
 const signupController = require('./Controllers/Signup_Controller');
 
 app.use(globalErrorHandler);
+
+app.use('/api', signupController);
 
 async function startServer(){
     try{
@@ -25,6 +29,9 @@ async function startServer(){
 
         await sequelize.sync();
         console.log("Schema Synced");
+
+        await RedisClient.connect();
+        console.log("Redis client connected");
 
         app.listen(port, ()=> console.log(`server started http://localhost:${port}`));
     }
