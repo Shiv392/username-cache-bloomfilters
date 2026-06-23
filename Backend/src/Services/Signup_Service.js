@@ -9,6 +9,7 @@ const SignupService = async (req, res) => {
         }
 
         //first check if the username is not available
+        //it will check BF.EXISTS in usernames dataset in the bloom filter.
         const exists = await RedisClient.sendCommand([
             'BF.EXISTS', 'usernames', username
         ]);

@@ -1,0 +1,28 @@
+<div class="input-field-wrapper">
+  <input
+    [id]="id"
+    pInputText
+    [type]="currentType"
+    [formControl]="control!"
+    [readonly]="loading"
+    [placeholder]="placeholder"
+    class="field"
+  />
+  <label [for]="id">{{ label }}</label>
+
+  <div *ngIf="loading" class="input-overlay"></div>
+
+  <button
+    *ngIf="showPasswordToggle && !loading"
+    type="button"
+    class="password-toggle"
+    (click)="togglePasswordVisibility()"
+    [attr.aria-label]="passwordVisible ? 'Hide password' : 'Show password'"
+  >
+    <i class="pi" [ngClass]="passwordVisible ? 'pi-eye-slash' : 'pi-eye'"></i>
+  </button>
+
+  <div *ngIf="loading" class="input-loader" aria-hidden="true">
+    <i class="pi pi-spin pi-spinner"></i>
+  </div>
+</div>
