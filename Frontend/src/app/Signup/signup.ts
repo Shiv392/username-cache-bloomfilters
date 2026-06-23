@@ -23,6 +23,7 @@ export class Signup implements OnInit {
   private fb = inject(FormBuilder);
   public submitted = false;
   public submittedMessage = '';
+  public passwordVisible = false;
 
   public signupForm: FormGroup;
 
@@ -47,6 +48,10 @@ export class Signup implements OnInit {
 
   get password() {
     return this.signupForm.get('password');
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 
   onSubmit(): void {

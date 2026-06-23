@@ -1,43 +1,58 @@
 <div class="signup-page">
   <div class="signup-card">
-    <div class="header-group">
-      <h1>Signup</h1>
-      <!-- <p class="subtitle">Create your account with secure credentials and a red wine inspired theme.</p> -->
+    <div class="signup-panel intro-panel">
+      <div class="panel-tag">Create an account</div>
+      <h1>Bloom Filters</h1>
+      <p>Fast username validation with low memory overhead, built for a smoother signup experience.</p>
+      <div class="panel-highlights">
+        <div>
+          <strong>Lightweight</strong>
+          <span>Minimal memory use</span>
+        </div>
+        <div>
+          <strong>Reliable</strong>
+          <span>Low false positives</span>
+        </div>
+      </div>
     </div>
 
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
-      <p-floatlabel  variant="on">
-        <input id="email" pInputText type="email" formControlName="userEmail" class="field" />
-        <label for="email">Email</label>
-      </p-floatlabel>
-      <div class="field-feedback" *ngIf="userEmail?.invalid && (userEmail?.dirty || userEmail?.touched)">
-        <span *ngIf="userEmail?.errors?.['required']">Email is required.</span>
-        <span *ngIf="userEmail?.errors?.['email']">Enter a valid email address.</span>
+    <div class="signup-panel form-panel">
+      <div class="form-header">
+        <small>Sign up</small>
+        <h2>Secure your Bloom Filters account</h2>
       </div>
 
-      <p-floatlabel  variant="on">
-        <input id="username" pInputText type="text" formControlName="userName" class="field" />
-        <label for="username">Username</label>
-      </p-floatlabel>
-      <div class="field-feedback" *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)">
-        <span *ngIf="userName?.errors?.['required']">Username is required.</span>
-      </div>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+        <div class="field-group">
+          <p-floatlabel variant="on">
+            <input id="email" pInputText type="email" formControlName="userEmail" class="field" />
+            <label for="email">Email</label>
+          </p-floatlabel>
+        </div>
 
-      <p-floatlabel  variant="on">
-        <p-password formControlName="password" [toggleMask]="true" inputId="password" class="field"></p-password>
-        <label for="password">Password</label>
-      </p-floatlabel>
+        <div class="field-group">
+          <p-floatlabel variant="on">
+            <input id="username" pInputText type="text" formControlName="userName" class="field" />
+            <label for="username">Username</label>
+          </p-floatlabel>
+        </div>
 
-      <div class="field-feedback" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-        <span *ngIf="password?.errors?.['required']">Password is required.</span>
-        <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters.</span>
-      </div>
+        <div class="field-group password-wrapper">
+          <p-floatlabel variant="on">
+            <input id="password" pInputText [type]="passwordVisible ? 'text' : 'password'" formControlName="password" class="field password-field" />
+            <label for="password">Password</label>
+          </p-floatlabel>
+          <button type="button" class="password-toggle" (click)="togglePasswordVisibility()" [attr.aria-label]="passwordVisible ? 'Hide password' : 'Show password'">
+            <i class="pi" [ngClass]="passwordVisible ? 'pi-eye-slash' : 'pi-eye'"></i>
+          </button>
+        </div>
 
-      <button pButton type="submit" label="Create Account" class="submit-btn" [disabled]="signupForm.invalid"></button>
+        <button pButton type="submit" label="Continue" class="submit-btn" [disabled]="signupForm.invalid"></button>
 
-      <div *ngIf="submittedMessage" class="success-box">
-        {{ submittedMessage }}
-      </div>
-    </form>
+        <div *ngIf="submittedMessage" class="success-box">
+          {{ submittedMessage }}
+        </div>
+      </form>
+    </div>
   </div>
 </div>
