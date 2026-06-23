@@ -13,6 +13,10 @@ const logger = winston.createLogger(
         new winston.transports.Console(), //will print logs in the terminal
         new winston.transports.File({
             filename : 'src/logs/app.log'
+        }),
+
+        new winston.transports.File({
+            filename : 'src/logs/error.log'
         })
     ]
 }

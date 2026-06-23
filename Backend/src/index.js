@@ -37,7 +37,6 @@ async function startServer(){
         app.listen(port, ()=> logger.info(`Server started : http://localhost:${port}`));
     }
     catch(err){
-        // console.log("error while starting server", err);
         logger.error(err);
     }
 }
