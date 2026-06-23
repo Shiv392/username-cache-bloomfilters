@@ -3,14 +3,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  /* padding: 2rem; */
   box-sizing: border-box;
   background: #eff6ff;
   color: #0f172a;
 }
 
 .signup-card {
-  width: min(100%, 960px);
+  width: min(100%, 900px);
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   border-radius: 1.5rem;
