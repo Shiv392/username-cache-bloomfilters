@@ -1,0 +1,108 @@
+.input-field-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.input-field-wrapper label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  margin: 0;
+  color: #6b7280;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  background: transparent;
+  padding: 0 0.25rem;
+}
+
+.field {
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 1.3rem 3rem 0.9rem 1rem;
+  border-radius: 0.95rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field:focus + label,
+.field:not(:placeholder-shown) + label {
+  transform: translateY(-1.55rem);
+  font-size: 0.85rem;
+  color: #2563eb;
+}
+
+.field:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.18);
+}
+
+.field.ng-invalid.ng-touched {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 0.03rem rgba(239, 68, 68, 0.18) !important;
+}
+
+.password-toggle,
+.input-loader,
+.input-overlay {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.password-toggle {
+  border: none;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.input-loader {
+  color: #6b7280;
+  z-index: 3;
+}
+
+.input-overlay {
+  inset: 0;
+  width: calc(100% - 2rem);
+  height: calc(100% - 1.8rem);
+  right: 0.9rem;
+  left: 0.9rem;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.2);
+  pointer-events: all;
+  z-index: 1;
+}
+
+.input-loader .pi {
+  font-size: 1.05rem;
+}
+
+.password-toggle:focus {
+  outline: none;
+}
+
+.password-toggle .pi {
+  font-size: 1.05rem;
+}
+
+.field-feedback {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: #ef4444;
+  min-height: 1rem;
+}

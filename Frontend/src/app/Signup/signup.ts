@@ -1,20 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { FloatLabelModule } from 'primeng/floatlabel';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { InputField } from '../shared/components/input-field/input-field';
+import { Button } from '../shared/components/button/button';
 
 @Component({
   selector: 'app-signup',
-  imports: [CommonModule, FormsModule, 
-    ReactiveFormsModule,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    FloatLabelModule
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, InputField, Button],
   templateUrl: './signup.html',
   styleUrls: ['./signup.css'],
 })
@@ -23,9 +15,10 @@ export class Signup implements OnInit {
   private fb = inject(FormBuilder);
   public submitted = false;
   public submittedMessage = '';
-  public passwordVisible = false;
 
   public signupForm: FormGroup;
+
+  public userNameLoader : boolean = false;
 
   constructor() {
     this.signupForm = this.fb.group({
@@ -38,20 +31,16 @@ export class Signup implements OnInit {
   ngOnInit(): void {
   }
 
-  get userEmail() {
-    return this.signupForm.get('userEmail');
+  get userEmail(): FormControl {
+    return this.signupForm.get('userEmail') as FormControl;
   }
 
-  get userName() {
-    return this.signupForm.get('userName');
+  get userName(): FormControl {
+    return this.signupForm.get('userName') as FormControl;
   }
 
-  get password() {
-    return this.signupForm.get('password');
-  }
-
-  togglePasswordVisibility(): void {
-    this.passwordVisible = !this.passwordVisible;
+  get password(): FormControl {
+    return this.signupForm.get('password') as FormControl;
   }
 
   onSubmit(): void {
@@ -59,7 +48,6 @@ export class Signup implements OnInit {
 
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
-      this.submittedMessage = '';
       return;
     }
 

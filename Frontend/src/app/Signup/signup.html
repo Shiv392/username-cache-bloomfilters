@@ -24,30 +24,22 @@
 
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
         <div class="field-group">
-          <p-floatlabel variant="on">
-            <input id="email" pInputText type="email" formControlName="userEmail" class="field" />
-            <label for="email">Email</label>
-          </p-floatlabel>
+          <app-input-field [control]="userEmail" label="Email" type="email" id="email"></app-input-field>
         </div>
 
         <div class="field-group">
-          <p-floatlabel variant="on">
-            <input id="username" pInputText type="text" formControlName="userName" class="field" />
-            <label for="username">Username</label>
-          </p-floatlabel>
+          <app-input-field [control]="userName" label="Username" type="text" id="username"
+          [loading]="userNameLoader"
+          ></app-input-field>
         </div>
 
-        <div class="field-group password-wrapper">
-          <p-floatlabel variant="on">
-            <input id="password" pInputText [type]="passwordVisible ? 'text' : 'password'" formControlName="password" class="field password-field" />
-            <label for="password">Password</label>
-          </p-floatlabel>
-          <button type="button" class="password-toggle" (click)="togglePasswordVisibility()" [attr.aria-label]="passwordVisible ? 'Hide password' : 'Show password'">
-            <i class="pi" [ngClass]="passwordVisible ? 'pi-eye-slash' : 'pi-eye'"></i>
-          </button>
+        <div class="field-group">
+          <app-input-field [control]="password" label="Password" type="password" id="password" [showPasswordToggle]="true"></app-input-field>
         </div>
 
-        <button pButton type="submit" label="Continue" class="submit-btn" [disabled]="signupForm.invalid"></button>
+        <app-button label="Create Account" type="submit"
+        [disabled]="signupForm?.invalid"
+        styleClass="submit-btn"></app-button>
 
         <div *ngIf="submittedMessage" class="success-box">
           {{ submittedMessage }}
