@@ -38,7 +38,7 @@
         </div>
 
         <app-button label="Create Account" type="submit"
-        [disabled]="signupForm?.invalid"
+        (clicked)="btn_Clicked($event)"
         styleClass="submit-btn"></app-button>
 
         <div *ngIf="submittedMessage" class="success-box">

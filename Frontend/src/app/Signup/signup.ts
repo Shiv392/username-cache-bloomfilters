@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { InputField } from '../shared/components/input-field/input-field';
 import { Button } from '../shared/components/button/button';
+import { NotificationService } from '../shared/services/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,6 +14,8 @@ import { Button } from '../shared/components/button/button';
 export class Signup implements OnInit {
 
   private fb = inject(FormBuilder);
+  private notificationService = inject(NotificationService);
+
   public submitted = false;
   public submittedMessage = '';
 
@@ -43,9 +46,13 @@ export class Signup implements OnInit {
     return this.signupForm.get('password') as FormControl;
   }
 
+  public btn_Clicked(event :any){
+    this.notificationService.showSuccess({summary : "Summary", detail : "Detail"});
+  }
+
   onSubmit(): void {
     this.submitted = true;
-
+    this.notificationService.showSuccess({summary : "Summary", detail : "Detail"});
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       return;
