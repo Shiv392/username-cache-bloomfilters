@@ -8,8 +8,9 @@ if(!username){
     throw new AppError("Username is required", 400);
 }
 
+let modifiedUserName = username.trim().toLowerCase();
 const exists = await RedisClient.sendCommand([
-    'BF.EXISTS', 'usernames', username
+    'BF.EXISTS', 'usernames', modifiedUserName
 ]);
 
 //if Bloom filter say not available, make sure to db also

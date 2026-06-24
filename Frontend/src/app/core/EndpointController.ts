@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 
-Injectable({
+@Injectable({
     providedIn : 'root'
 })
 
 export class EndpointControllerService{
     public signup : string = '/signup';
-    public username : string = '/username';
+    public username : string = '/api/fetch/username';
 }
