@@ -18,8 +18,10 @@ app.use(express.json());
 const globalErrorHandler = require('./Utils/GlobalErrorHandler');
 
 const signupController = require('./Controllers/Signup_Controller');
+const {SignupController, UserNameController} = require('./Controllers/index.js');
 
-app.use('/api', signupController);
+app.use('/api', SignupController);
+app.use('/api', UserNameController);
 
 app.use(globalErrorHandler);
 
