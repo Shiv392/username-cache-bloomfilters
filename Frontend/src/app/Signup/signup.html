@@ -28,9 +28,21 @@
         </div>
 
         <div class="field-group">
+            <span *ngIf="signupForm?.value?.userName?.trim()?.length!=0">
+          username : {{signupForm?.value?.userName?.trim()?.toLowerCase()}}
+          </span>
           <app-input-field [control]="userName" label="Username" type="text" id="username"
           [loading]="userNameLoader"
           ></app-input-field>
+
+           <span *ngIf="userNameError">
+          {{userNameError}}
+          </span>
+
+          <span *ngIf="userNameMsg">
+          {{userNameMsg}}
+          </span>
+
         </div>
 
         <div class="field-group">
