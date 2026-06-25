@@ -3,9 +3,9 @@ const { RedisClient } = require('../Configs/index');
 const AppError = require('../Utils/AppError');
 
 const SignupService = async (req, res) => {
-        const { name, email, username } = req.body;
-        if (!name || !email || !username) {
-            throw new AppError("Name, Email & Username is required", 400);
+        const { name, email, username, password} = req.body;
+        if (!name || !email || !username || !password) {
+            throw new AppError("Name, Email ,Username & Password are required", 400);
         }
 
         //first check if the username is not available

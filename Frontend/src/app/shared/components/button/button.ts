@@ -14,6 +14,8 @@ export class Button {
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() disabled? : boolean;
   @Input() styleClass = '';
+  @Input() loading? : boolean = false;
+  
   @Output() clicked = new EventEmitter<MouseEvent>();
 
   emitClick(event: MouseEvent): void {

@@ -28,6 +28,8 @@ export class Signup implements OnInit, OnDestroy {
   public userNameError : string|null = null;
   public userNameMsg : string | null = null;
 
+  public loading: boolean = false;
+
   public subject$ = new Subject<void>();
 
   constructor() {
@@ -54,17 +56,13 @@ export class Signup implements OnInit, OnDestroy {
     this.userNameLoader = true;
     this.SignupService.ValidateUserName({username : username}).subscribe({
       next : (res)=>{
-        console.log('res------>', res);
-
         this.userNameMsg = res.message;
-        console.log(this.userNameMsg);
         this.userNameLoader = false;
         this.userNameError = null;
       },
       error : (err)=>{
         this.userNameError = err.error;
         this.userNameMsg = null;
-        console.log(this.userNameError);
         this.userNameLoader = false;
       }
     })
@@ -82,19 +80,30 @@ export class Signup implements OnInit, OnDestroy {
     return this.signupForm.get('password') as FormControl;
   }
 
-  public btn_Clicked(event :any){
-    this.notificationService.showSuccess({summary : "Summary", detail : "Detail"});
-  }
-
   onSubmit(): void {
     this.submitted = true;
-    this.notificationService.showSuccess({summary : "Summary", detail : "Detail"});
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       return;
     }
 
-    this.submittedMessage = `Welcome, ${this.userName?.value}! Your account is ready to be created.`;
+    this.loading = true;
+    const apibody = {
+      "username": this.signupForm.value.userName,
+      "email" : this.signupForm.value.userEmail,
+      "password" : this.signupForm.value.password
+    }
+
+    console.log("apibody------->", apibody);
+    this.SignupService.validateSignup(apibody).subscribe({
+      next : (res)=>{
+        this.loading = false;
+        this.notificationService.showSuccess({summary : "Success", detail : res.message});
+      },
+      error : ()=>{
+        this.loading = false;
+      }
+    })
   }
 
   ngOnDestroy(): void {

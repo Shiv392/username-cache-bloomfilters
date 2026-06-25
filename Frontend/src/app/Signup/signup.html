@@ -50,7 +50,7 @@
         </div>
 
         <app-button label="Create Account" type="submit"
-        (clicked)="btn_Clicked($event)"
+        [loading]="loading"
         styleClass="submit-btn"></app-button>
 
         <div *ngIf="submittedMessage" class="success-box">

@@ -1,3 +1,5 @@
-<button pButton [type]="type" [disabled]="disabled" [ngClass]="styleClass" (click)="emitClick($event)">
+<button pButton [type]="type" [disabled]="disabled" [ngClass]="styleClass" (click)="emitClick($event)"
+[loading]="loading || false"
+>
   {{ label }}
 </button>

@@ -5,6 +5,6 @@ import { Injectable } from "@angular/core";
 })
 
 export class EndpointControllerService{
-    public signup : string = '/signup';
+    public signup : string = '/api/signup';
     public username : string = '/api/fetch/username';
 }
