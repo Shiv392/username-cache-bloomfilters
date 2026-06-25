@@ -30,7 +30,7 @@ async function startServer(){
         await sequelize.authenticate();
         console.log("database connection done");
 
-        await sequelize.sync();
+        await sequelize.sync({force : true});
         console.log("Schema Synced");
 
         await RedisClient.connect();

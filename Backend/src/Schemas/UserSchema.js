@@ -12,10 +12,6 @@ const UserSchema = sequelize.define(
             unique : true,
             autoIncrement : true
         },
-        Name : {
-            type : DataTypes.STRING,
-            allowNull : false
-        },
         Email : {
             type : DataTypes.STRING,
             unique : true,
@@ -25,13 +21,24 @@ const UserSchema = sequelize.define(
             type : DataTypes.STRING,
             unique : true,
             allowNull : false
+        },
+        UserPassword : {
+            type : DataTypes.STRING,
+            allowNull : true,
         }
     },
     {
         timestamps : true,
         createdAt : true, 
-        tableName : 'User'
-    }
+        tableName : 'Users',
+        indexes : [{
+            fields : ['UserId']
+        },
+        {
+            fields : ['Email']
+        }
+    ]
+    },
 );
 
 module.exports = UserSchema;
