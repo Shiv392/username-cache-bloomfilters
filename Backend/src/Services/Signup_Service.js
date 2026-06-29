@@ -1,11 +1,22 @@
 const { findUserByEmail, findUserName, UserSignUp } = require('../Repository/index');
 const { RedisClient } = require('../Configs/index');
 const AppError = require('../Utils/AppError');
+const ValidateEmail = require("../Utils/ValidateEmail");
+const ValidatePassword = require("../Utils/ValidatePassword");
 
 const SignupService = async (req, res) => {
         const { email, username, password} = req.body;
         if (!email || !username || !password) {
             throw new AppError("Email ,Username & Password are required", 400);
+        }
+
+        //check email and password validation
+        if(!ValidateEmail({email : email})){
+            throw new AppError("Email is not valid", 400);
+        }
+
+        if(!ValidatePassword({password : password})){
+            throw new AppError("Password is invalid", 400);
         }
 
         //first check if the username is not available
