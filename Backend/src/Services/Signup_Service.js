@@ -3,6 +3,7 @@ const { RedisClient } = require('../Configs/index');
 const AppError = require('../Utils/AppError');
 const ValidateEmail = require("../Utils/ValidateEmail");
 const ValidatePassword = require("../Utils/ValidatePassword");
+const HashPassword = require('../Utils/HashPassword');
 
 const SignupService = async (req, res) => {
         const { email, username, password} = req.body;
@@ -40,7 +41,8 @@ const SignupService = async (req, res) => {
         }
 
         //3. insert new user;
-        await UserSignUp({ userpassword: password, email: email, username: username });
+        const hashPassword = await HashPassword({password : password});
+        await UserSignUp({ userpassword: hashPassword, email: email, username: username });
 
         //4. update bloom filters
         await RedisClient.sendCommand([
