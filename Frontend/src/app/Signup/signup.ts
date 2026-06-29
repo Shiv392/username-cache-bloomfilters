@@ -27,6 +27,7 @@ export class Signup implements OnInit, OnDestroy {
   public userNameLoader : boolean = false;
   public userNameError : string|null = null;
   public userNameMsg : string | null = null;
+  public userNameMsgType : string = 'success';
 
   public loading: boolean = false;
 
@@ -49,21 +50,23 @@ export class Signup implements OnInit, OnDestroy {
     this.userNameError = null;
     this.userNameMsg = null;
 
-    if(!username) return;
+    if(!username || username.trim().length==0) return;
 
     username = username.trim().toLowerCase();
 
     this.userNameLoader = true;
     this.SignupService.ValidateUserName({username : username}).subscribe({
       next : (res)=>{
-        this.userNameMsg = res.message;
         this.userNameLoader = false;
-        this.userNameError = null;
-      },
-      error : (err)=>{
-        this.userNameError = err.error;
-        this.userNameMsg = null;
-        this.userNameLoader = false;
+        if(res.message){
+          this.userNameMsg = res.message;
+          this.userNameMsgType = 'success';
+        }
+        else{
+          
+          this.userNameMsg = res.error;
+          this.userNameMsgType = 'error';
+        }
       }
     })
   }

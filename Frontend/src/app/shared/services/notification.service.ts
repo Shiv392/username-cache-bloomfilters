@@ -23,6 +23,6 @@ export class NotificationService{
     }
 
     public showError(data : NotificationInterface) : void{
-        this.notificationSubject.next({type : 'success', data : data});
+        this.notificationSubject.next({type : 'error', data : data});
     }
 }

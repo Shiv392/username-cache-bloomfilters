@@ -27,22 +27,20 @@
           <app-input-field [control]="userEmail" label="Email" type="email" id="email"></app-input-field>
         </div>
 
-        <div class="field-group">
-            <span *ngIf="signupForm?.value?.userName?.trim()?.length!=0">
-          username : {{signupForm?.value?.userName?.trim()?.toLowerCase()}}
-          </span>
+        <div class="field-group username-field-group">
+          <!-- <div class="field-meta">
+            <span *ngIf="signupForm?.value?.userName?.trim()?.length != 0" class="field-meta-label">
+              username : {{ signupForm?.value?.userName?.trim()?.toLowerCase() }}
+            </span>
+          </div> -->
+
           <app-input-field [control]="userName" label="Username" type="text" id="username"
-          [loading]="userNameLoader"
+            [loading]="userNameLoader"
+            [lowercase]="true"
+            [inputMsg]="userNameMsg"
+            [msgType]="userNameMsgType"
           ></app-input-field>
-
-           <span *ngIf="userNameError">
-          {{userNameError}}
-          </span>
-
-          <span *ngIf="userNameMsg">
-          {{userNameMsg}}
-          </span>
-
+          <!-- {{userNameMsg}} -->
         </div>
 
         <div class="field-group">
