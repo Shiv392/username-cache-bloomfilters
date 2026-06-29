@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const {sequelize} = require('../Configs/index');
+const Sequelize = require('sequelize');
 
 console.log("User Schema defined");
 
@@ -31,7 +32,6 @@ const UserSchema = sequelize.define(
     },
     {
         timestamps : true,
-        createdAt : true, 
         tableName : 'Users',
     //     indexes : [{
     //         fields : ['UserId']

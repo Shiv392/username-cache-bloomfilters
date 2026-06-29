@@ -3,7 +3,7 @@ const {RedisClient} = require('../Configs/index');
 
 const findUserByEmail = async({email})=>{
     const [user] = await UserSchema.sequelize.query(
-        `select * from User where email = ? limit 1`,
+        `select email from Users where email = ? limit 1`,
         {
             replacements : [email]
         }
@@ -14,7 +14,7 @@ const findUserByEmail = async({email})=>{
 
 const findUserName = async({username})=>{
     const [user] = await UserSchema.sequelize.query(
-        `select * from User where username = ? limit 1 `,
+        `select * from Users where username = ? limit 1 `,
         {
             replacements : [username]
         }
@@ -23,13 +23,12 @@ const findUserName = async({username})=>{
     return user[0] || null;
 }
 
-const UserSignUp = async({name, email, username})=>{
-     const res = await UserSchema.sequelize.query(
-        `insert into User(name, email, username) values (?, ?, ?)`
-        ,{
-            replacements : [name, email, username]
-        }
-     );
+const UserSignUp = async({email, username, userpassword})=>{
+     const res = await UserSchema.create({
+        Email : email,
+        UserName : username,
+        UserPassword : userpassword
+     })
 
      return res;
 }
