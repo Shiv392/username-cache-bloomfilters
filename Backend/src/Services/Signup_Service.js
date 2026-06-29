@@ -3,9 +3,9 @@ const { RedisClient } = require('../Configs/index');
 const AppError = require('../Utils/AppError');
 
 const SignupService = async (req, res) => {
-        const { name, email, username, password} = req.body;
-        if (!name || !email || !username || !password) {
-            throw new AppError("Name, Email ,Username & Password are required", 400);
+        const { email, username, password} = req.body;
+        if (!email || !username || !password) {
+            throw new AppError("Email ,Username & Password are required", 400);
         }
 
         //first check if the username is not available
@@ -29,7 +29,7 @@ const SignupService = async (req, res) => {
         }
 
         //3. insert new user;
-        await UserSignUp({ name: name, email: email, username: username });
+        await UserSignUp({ userpassword: password, email: email, username: username });
 
         //4. update bloom filters
         await RedisClient.sendCommand([

@@ -1,5 +1,8 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../Configs/DB/DbConfig');
+const {sequelize} = require('../Configs/index');
+const Sequelize = require('sequelize');
+
+console.log("User Schema defined");
 
 const UserSchema = sequelize.define(
     'User',
@@ -29,16 +32,17 @@ const UserSchema = sequelize.define(
     },
     {
         timestamps : true,
-        createdAt : true, 
         tableName : 'Users',
-        indexes : [{
-            fields : ['UserId']
-        },
-        {
-            fields : ['Email']
-        }
-    ]
+    //     indexes : [{
+    //         fields : ['UserId']
+    //     },
+    //     {
+    //         fields : ['Email']
+    //     }
+    // ]
     },
 );
 
+console.log("After define:", Object.keys(sequelize.models));
+console.log(UserSchema === sequelize.models.User);
 module.exports = UserSchema;
