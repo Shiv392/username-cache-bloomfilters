@@ -32,14 +32,7 @@ const UserSchema = sequelize.define(
     },
     {
         timestamps : true,
-        tableName : 'Users',
-    //     indexes : [{
-    //         fields : ['UserId']
-    //     },
-    //     {
-    //         fields : ['Email']
-    //     }
-    // ]
+        tableName : 'Users'
     },
 );
 

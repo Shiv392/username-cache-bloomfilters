@@ -17,7 +17,7 @@ const exists = await RedisClient.sendCommand([
 if(Number(exists) == 1){
     const userExits = await findUserName({username : username});
     if(userExits){
-        throw new AppError("Username already exists, try different usernames", 400);
+        throw new AppError("Username already exists, try different usernames", 200);
     }
 }
 
